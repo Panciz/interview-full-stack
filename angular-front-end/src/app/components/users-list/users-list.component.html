@@ -1,30 +1,36 @@
 <div class="users-container">
   <h1>Users List</h1>
 
-  <div *ngIf="loading()" class="loading">
-    <p>Loading users...</p>
-  </div>
-
-  <div *ngIf="error()" class="error">
-    <p>{{ error() }}</p>
-    <button (click)="loadUsers()">Retry</button>
-  </div>
-
-  <div *ngIf="!loading() && !error()" class="users-list">
-    <div *ngIf="users().length === 0" class="no-users">
-      <p>No users found.</p>
+  @if (loading()) {
+    <div class="loading">
+      <p>Loading users...</p>
     </div>
-
-    <div class="user-card" *ngFor="let user of users()">
-      <div class="user-header">
-        <h3>{{ user.name }}</h3>
-        <span class="user-id">#{{ user.id }}</span>
-      </div>
-      <div class="user-details">
-        <p><strong>Username:</strong> {{ user.username || 'N/A' }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Phone:</strong> {{ user.phone || 'N/A' }}</p>
-      </div>
+  } @else if (error()) {
+    <div class="error">
+      <p>{{ error() }}</p>
+      <button (click)="loadUsers()">Retry</button>
     </div>
-  </div>
+  } @else {
+    <div class="users-list">
+      @if (users().length === 0) {
+        <div class="no-users">
+          <p>No users found.</p>
+        </div>
+      } @else {
+        @for (user of users(); track user.id) {
+          <div class="user-card">
+            <div class="user-header">
+              <h3>{{ user.name }}</h3>
+              <span class="user-id">#{{ user.id }}</span>
+            </div>
+            <div class="user-details">
+              <p><strong>Username:</strong> {{ user.username || 'N/A' }}</p>
+              <p><strong>Email:</strong> {{ user.email }}</p>
+              <p><strong>Phone:</strong> {{ user.phone || 'N/A' }}</p>
+            </div>
+          </div>
+        }
+      }
+    </div>
+  }
 </div>

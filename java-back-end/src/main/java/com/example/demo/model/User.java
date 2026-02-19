@@ -25,6 +25,12 @@ public class User {
     @Email(message = "Email should be valid")
     private String email;
 
+    @Size(max = 50, message = "Username must not exceed 50 characters")
+    private String username;
+
+    @Size(max = 20, message = "Phone must not exceed 20 characters")
+    private String phone;
+
     // Constructors
     public User() {
     }
@@ -32,6 +38,13 @@ public class User {
     public User(String name, String email) {
         this.name = name;
         this.email = email;
+    }
+
+    public User(String name, String email, String username, String phone) {
+        this.name = name;
+        this.email = email;
+        this.username = username;
+        this.phone = phone;
     }
 
     // Getters and Setters
@@ -59,12 +72,30 @@ public class User {
         this.email = email;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }
