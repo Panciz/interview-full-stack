@@ -1,15 +1,12 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class UserService {
-  private apiUrl = 'https://jsonplaceholder.typicode.com/users';
-
-  constructor(private http: HttpClient) {}
+  private readonly http = inject(HttpClient);
+  private readonly apiUrl = 'http://localhost:8080/api/users';
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
