@@ -6,6 +6,7 @@ import { User } from '../../models/user.interface';
 @Component({
   selector: 'app-users-list',
   imports: [CommonModule],
+  providers: [UserService],
   templateUrl: './users-list.component.html',
   styleUrl: './users-list.component.css'
 })
